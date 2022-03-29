@@ -41,5 +41,13 @@ class NewsGetSearchErrorState extends NewsAppStates{
   NewsGetSearchErrorState(this.error);
 }
 
-class changeNewsAppModeState extends NewsAppStates{}
+class ChangeNewsAppModeState extends NewsAppStates{}
+
+class NewsRefreshBusinessSuccessState extends NewsAppStates{}
+
+class NewsRefreshSportsSuccessState extends NewsAppStates{}
+
+class NewsRefreshScienceSuccessState extends NewsAppStates{}
+
+class NewsRefreshErrorState extends NewsAppStates{}
 

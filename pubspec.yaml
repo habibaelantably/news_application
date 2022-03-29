@@ -36,12 +36,20 @@ dependencies:
   hexcolor: ^2.0.5
   shared_preferences: ^2.0.6
   webview_flutter: ^2.0.12
+  pull_to_refresh: ^2.0.0
+
+
 
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.1.1
+flutter_native_splash:
+  color: "#A608C2"
+  image: assets/Images/splashImage.png
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

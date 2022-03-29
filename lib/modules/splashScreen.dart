@@ -16,7 +16,7 @@ class _splashScreenState extends State<splashScreen> {
   void initState(){
     super.initState();
 
-    Timer(Duration(seconds: 3), ()=>Navigator.push(context,
+    Timer(Duration(seconds: 3), ()=>Navigator.pushReplacement(context,
         MaterialPageRoute(
             builder: (context)=> NewsLayout()
         )));

@@ -21,6 +21,7 @@ class DioHelper
     required Map<String,dynamic> query,
 })async
 {
+
   return await dio!.get(url, queryParameters:query );
 }
 

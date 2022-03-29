@@ -1,10 +1,8 @@
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:news_application/modules/webView/webView.dart';
-import 'package:news_application/shared/cubit/States.dart';
 import 'package:news_application/shared/cubit/cubit.dart';
 
 
@@ -40,6 +38,7 @@ Widget deafultFormField({
   },
 
 );
+//var refreshKey = GlobalKey<RefreshIndicatorState>();
 
 Widget buildArticleItem(article,context) => GestureDetector(
   onTap: ()
@@ -67,9 +66,8 @@ Widget buildArticleItem(article,context) => GestureDetector(
             image: DecorationImage(
 
              image: NetworkImage('${article['urlToImage'] == null ?
-             Icon(Icons.warning_outlined,
-               color: Colors.deepOrangeAccent,
-               size: 30.0,) : article['urlToImage'] }'),
+             'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'
+                 : article['urlToImage'] }'),
               fit: BoxFit.cover,
 
             ),
@@ -137,7 +135,7 @@ Widget articleBuilder (list,context,{isSearch=false})=> Conditional.single(
         physics: BouncingScrollPhysics(),
         itemBuilder: (context,index)=>buildArticleItem(NewsAppCubit.get(context).search[index],context),
         separatorBuilder:(context,index)=> myDivider(),
-        itemCount: 10
+        itemCount: list.length
     ),
     fallbackBuilder: (context)=>isSearch ? Container(): Center(child: CircularProgressIndicator())
 );

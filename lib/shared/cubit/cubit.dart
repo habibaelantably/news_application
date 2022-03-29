@@ -10,6 +10,7 @@ import 'package:news_application/modules/bussiness/businessScreen.dart';
 import 'package:news_application/modules/science/scienceScreen.dart';
 import 'package:news_application/modules/sports/sportsScreen.dart';
 import 'package:news_application/shared/cubit/States.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class NewsAppCubit extends Cubit<NewsAppStates> {
   NewsAppCubit() : super(NewsAppIntialState());
@@ -148,7 +149,7 @@ class NewsAppCubit extends Cubit<NewsAppStates> {
       }).catchError((error){
         print(error.toString());
         emit(NewsGetScienceErrorState(error.toString()));
-        //return Completer<Never>().future;
+        return Completer<Never>().future;
       });
 
     }else
@@ -221,6 +222,50 @@ class NewsAppCubit extends Cubit<NewsAppStates> {
       }
 
     }
+
+  RefreshController businessController =
+  RefreshController(initialRefresh: false);
+
+    RefreshController scienceController =
+  RefreshController(initialRefresh: false);
+
+    RefreshController sportsController =
+  RefreshController(initialRefresh: false);
+
+  Future<void> onRefresh()async
+  {
+    Future.delayed(Duration(seconds: 1));
+    if(currentIndex==0){
+      business=[];
+      getbusiness();
+      emit(NewsRefreshBusinessSuccessState());
+      businessController.refreshCompleted();
+    } else if(currentIndex==1){
+      sports=[];
+      getSports();
+      emit(NewsRefreshSportsSuccessState());
+      sportsController.refreshCompleted();
+    }else if(currentIndex==2){
+      science=[];
+      getScience();
+      emit(NewsRefreshScienceSuccessState());
+      scienceController.refreshCompleted();
+    }
+  }
+
+  void onLoading() async{
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+
+    if(currentIndex==0){
+      businessController.requestLoading();
+    } else if(currentIndex==1){
+      sportsController.requestLoading();
+
+    }else if(currentIndex==2){
+      scienceController.requestLoading();
+    }
+  }
 
 
 }
